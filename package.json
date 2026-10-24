@@ -1,0 +1,14 @@
+{
+  "name": "nodebb-safe-updater",
+  "version": "1.0.0",
+  "description": "Safely update a NodeBB installation while creating backups and validating the result.",
+  "main": "src/index.js",
+  "bin": {
+    "nodebb-safe-updater": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
