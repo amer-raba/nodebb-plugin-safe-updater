@@ -1,0 +1,19 @@
+{
+  "id": "nodebb-safe-updater",
+  "name": "NodeBB Safe Updater",
+  "description": "Adds a safe one-click update flow for a NodeBB installation.",
+  "library": "./src/nodebbPlugin.js",
+  "hooks": [
+    {
+      "hook": "static:app.load",
+      "method": "init"
+    },
+    {
+      "hook": "filter:admin.header.build",
+      "method": "addAdminNavigation"
+    }
+  ],
+  "staticDirs": {
+    "public": "public"
+  }
+}
