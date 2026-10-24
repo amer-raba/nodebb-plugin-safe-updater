@@ -1,22 +1,26 @@
 # NodeBB Safe Updater
 
-A conservative CLI utility for updating a NodeBB installation in a safe way.
+A conservative utility for keeping a NodeBB forum up to date safely.
 
-Features:
-- Verifies the target directory is a valid Git repository.
-- Refuses to run on a dirty working tree unless explicitly allowed.
-- Creates a backup before pulling changes.
-- Fetches and fast-forwards the selected branch.
-- Runs `npm install` (or equivalent) when a `package.json` is present.
-- Reports the result in a machine-readable summary.
+It supports two modes:
+- CLI mode for automation in scripts and cron jobs
+- One-click web mode with a button that triggers the update from the browser
 
-## Installation
+## Features
+- Verifies the target directory is a valid Git repository
+- Refuses to run on a dirty working tree unless explicitly allowed
+- Creates a backup before pulling changes
+- Fetches and fast-forwards the selected branch
+- Runs `npm install`, `yarn install`, or `pnpm install` when a `package.json` is present
+- Exposes a simple web page that triggers the update in one click
+
+## Install
 
 ```bash
 npm install
 ```
 
-## Usage
+## CLI usage
 
 Update the current directory:
 
@@ -30,27 +34,49 @@ Update a specific NodeBB installation:
 node src/index.js --directory /srv/nodebb --branch main --remote origin
 ```
 
-Allow updates despite local modifications:
+Allow dirty working trees:
 
 ```bash
 node src/index.js --directory /srv/nodebb --allow-dirty
 ```
 
-Skip package installation after the pull:
+Skip post-update install:
 
 ```bash
 node src/index.js --directory /srv/nodebb --skip-install
 ```
 
-## Why this is safe
+## Browser button mode
+
+Start the updater web panel:
+
+```bash
+npm start
+```
+
+Then open:
+
+```text
+http://localhost:3000/
+```
+
+Click the update button to trigger a safe pull of the latest version.
+
+Set the target directory and options with environment variables:
+
+```bash
+NODEBB_DIRECTORY=/srv/nodebb NODEBB_BRANCH=main NODEBB_REMOTE=origin npm start
+```
+
+## Safety checks
 
 This updater intentionally prefers a cautious workflow:
-- it bails out when the repo is dirty,
+- it aborts if the repo is dirty,
 - it creates a backup before the change,
 - it uses a fast-forward pull strategy,
 - and it keeps the update process explicit and inspectable.
 
-## Example JSON output
+## Example output
 
 ```json
 {
