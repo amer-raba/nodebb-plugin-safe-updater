@@ -2,21 +2,26 @@
 
 const { safeUpdate, parseArgs } = require('./safeUpdater');
 
-function main() {
+function main(argv = process.argv.slice(2)) {
   try {
-    const options = parseArgs(process.argv.slice(2));
+    const options = parseArgs(argv);
 
     if (options.help) {
-      console.log('Usage: nodebb-safe-updater [--directory /path/to/nodebb] [--branch main] [--remote origin] [--allow-dirty] [--skip-install]');
-      process.exit(0);
+      console.log('Usage: nodebb-safe-updater [--directory /path/to/nodebb] [--branch main] [--remote origin] [--allow-dirty] [--skip-install] [--backup-root /path/to/backups]');
+      return 0;
     }
 
     const result = safeUpdate(options);
     console.log(JSON.stringify(result, null, 2));
+    return 0;
   } catch (error) {
     console.error(error.message || error);
-    process.exit(1);
+    return 1;
   }
 }
 
-main();
+if (require.main === module) {
+  process.exitCode = main();
+}
+
+module.exports = { main };
