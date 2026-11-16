@@ -12,7 +12,7 @@
     "url": "https://github.com/amer-raba/nodebb-plugin-safe-updater/issues"
   },
   "nbbpm": {
-    "compatibility": "^3.0.0"
+    "compatibility": "^3.0.1"
   },
   "keywords": [
     "nodebb",
