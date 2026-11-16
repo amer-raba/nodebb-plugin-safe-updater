@@ -17,11 +17,9 @@ const plugin = {
   async init(params) {
     const { router, middleware } = params;
     const adminRoute = '/admin/plugins/nodebb-safe-updater';
-    const legacyRoute = '/plugins/nodebb-safe-updater';
     const apiRoute = '/api/v3/plugins/nodebb-safe-updater/update';
 
     router.get(adminRoute, middleware.admin.build, renderSafeUpdaterPage);
-    router.get(legacyRoute, middleware.admin.build, renderSafeUpdaterPage);
 
     // Updating changes the server's code and runs its package manager, so this
     // endpoint must be restricted to administrators, not merely logged-in users.
@@ -50,8 +48,9 @@ const plugin = {
   },
 
   addAdminNavigation(header, callback) {
+    // NodeBB ACP navigation routes are relative to /admin.
     header.plugins.push({
-      route: '/admin/plugins/nodebb-safe-updater',
+      route: '/plugins/nodebb-safe-updater',
       icon: 'fa-rocket',
       name: 'NodeBB Safe Updater'
     });
