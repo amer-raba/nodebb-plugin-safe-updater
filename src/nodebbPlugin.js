@@ -47,7 +47,7 @@ const plugin = {
 
   addAdminNavigation(header, callback) {
     header.plugins.push({
-      route: '/admin/plugins/nodebb-safe-updater',
+      route: '/plugins/nodebb-safe-updater',
       icon: 'fa-rocket',
       name: 'NodeBB Safe Updater'
     });
